@@ -54,6 +54,7 @@ background-size: cover; */
     justify-content: center;
     align-items: center;
     margin-right: 1rem;
+    text-transform: lowercase;
 }
 
 .fields svg {
@@ -103,3 +104,14 @@ background-size: cover; */
     font-size: 15px;
 
 }
+.dataContainer{
+
+
+display: flex;
+
+}
+.dataContainer p{
+
+margin-left: 5rem;
+
+    }

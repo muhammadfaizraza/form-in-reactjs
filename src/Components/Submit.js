@@ -1,5 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import '../Style/Submit.css'
+
+
+
+
+const LocalItem = ()=>{
+
+
+   const list = localStorage.getItem('lists')
+   
+   console.log(list)
+   
+   if(list){
+   
+   return JSON.parse(localStorage.getItem('lists'))
+   
+   }else{
+   return [];
+   
+   }
+   }
+
 
 const Submit = () => {
    const [registeration, setregisteration] = useState({
@@ -11,7 +32,7 @@ const Submit = () => {
 
    })
 
-   const [records, setrecords] = useState([])
+   const [records, setrecords] = useState(LocalItem())
 
 
 
@@ -43,26 +64,28 @@ const Submit = () => {
 
    }
 
-
+   useEffect(() => {
+      localStorage.setItem('lists', JSON.stringify(records));
+    }, [records]);
 
    return (
       <>
          <div className='login-div'>
             <form action='' onSubmit={handleSubmit}>
                <div className='fields'>
-                  <input required className='password'  type='text' autoComplete='off' onChange={handleChange} name='uname' placeholder='name' value={registeration.name} ></input>
+                  <input required className='password' type='text' autoComplete='off' onChange={handleChange} name='uname' placeholder='name' value={registeration.name} ></input>
                </div>
 
                <div className='fields'>
-                  <input  required className='password'type='text' autoComplete='off' onChange={handleChange} name='phone' placeholder='phone' value={registeration.phone} ></input>
+                  <input required className='password' type='text' autoComplete='off' onChange={handleChange} name='phone' placeholder='phone' value={registeration.phone} ></input>
                </div>
 
 
                <div className='fields'>
                   <input className='password' type='email' autoComplete='off' onChange={handleChange} name='email' placeholder='Email' value={registeration.email}></input>
                   <div className='fields'>
-                  <input className='password' type='password' autoComplete='off' onChange={handleChange} name='password' placeholder='Password' value={registeration.password} ></input>
-               </div>
+                     <input className='password' type='password' autoComplete='off' onChange={handleChange} name='password' placeholder='Password' value={registeration.password} ></input>
+                  </div>
 
 
                </div>
@@ -71,16 +94,16 @@ const Submit = () => {
 
             </form>
             <div>
-            {records.map((record, index) => { //const. map over each column I needed
-                            return (
-                                <div key={index} className>
-                                    <p>{record.uname}</p>
-                                    <p>{record.email}</p>
-                                    <p>{record.phone}</p>
-                                    <p>{record.password}</p>
-                                </div>
-                            );
-                        })}
+               {records.map((record, index) => { //const. map over each column I needed
+                  return (
+                     <div key={index} className='dataContainer'>
+                        <p>{record.uname}</p>
+                        <p>{record.email}</p>
+                        <p>{record.phone}</p>
+                        <p>{record.password}</p>
+                     </div>
+                  );
+               })}
 
 
             </div>
