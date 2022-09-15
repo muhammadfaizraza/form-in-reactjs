@@ -1,7 +1,6 @@
 
 import './App.css';
-import Form from './Components/Form';
-import Subscribe from './Components/Subscribe';
+
 import Submit from './Components/Submit';
 
 function App() {
